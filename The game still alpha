@@ -1,0 +1,212 @@
+//TURN - BASED GAME
+
+
+//Jurrasic.H
+#include <iostream>
+#include <string>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+using namespace std;
+
+class Dino {
+public:
+	string name;
+	string attackName;
+	string ID;
+	int health;
+	int attack;
+	Dino(string inID, string inName, string inAbilityName[], int inHealth, int inAbilityMaxEffect[]);
+};
+
+
+
+
+//Jurrasic.CPP
+#include "Jurrasic.h"
+
+using namespace std;
+
+Dino::Dino(string inID = 01, string inName = "", string inAbilityName[] = "", int inHealth = 0, int inAbilityMaxEffect[0] = 0){
+	ID = inID;
+	name = inName;
+	attackName = inAbilityName;
+	health = inHealth;
+	attack = inAbilityMaxEffect;
+}
+
+
+
+
+
+//TRAINER.H
+#include <string>
+
+using namespace std;
+
+class Trainer {
+public:
+	string name;
+	string inventory[6];
+	int size;
+	Trainer(string inName);
+};
+
+
+
+
+
+//TRAINER.CPP
+#include "Trainer.h"
+
+using namespace std;
+
+Trainer::Trainer(string inName) {
+	name = inName;
+	size = 6;
+}
+
+
+
+
+//TURN-BASED GAME.CPP
+//============================================================================
+// Name        : Turn-Based.cpp
+// Author      :
+// Version     :Alpha
+// Copyright   : Your copyright notice
+// Description : Hello World in C++, Ansi-style
+//============================================================================
+
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string>
+#include "Dino.h"
+#include "Trainer.h"
+
+using namespace std;
+
+void mainMenu(int& option);
+void fight(Trainer main, Trainer enemy);
+int addInventoryItem(string ID, Trainer trainer);
+void printInventory(Trainer trainer);
+void chooseMonsuta(Trainer trainer);
+
+int main() {
+	int mainopt;
+	Dino Blue("000", "Blue", {"Bite", "Gust of Wind"}, 60, {20, 30});
+	Dino Trex("001", "T-rex", {"Kill", "Rock Throw"}, 100, {40, 45});
+	Dino Delta("002", "Delta", {"Bite", "Fireball"}, 50, {20, 40});
+	Dino Echo("003", "Charlie", {"Bite", "Restore Health"}, 60, {25, 15});
+	Dino Charlie("004", "Echo", {"Bite", "Gust of Wind"}, 50, {30, 30});
+	Trainer player("");
+	Dino playerDino(), enemyDino();
+	mainMenu(mainopt);
+	while(mainopt == 2){
+		cout << "This is Jurrasic World, a testing turn based game to ready the coder for coding in C++.\n Created in C++.\n Thank you for playing." << endl;
+		system("PAUSE");
+		mainMenu(mainopt);
+	}
+	if(mainopt == 1){
+		int starter, playerchoice;
+		cout << "You are walking when you suddenly see a creature run around a corner. It's not an ordinary creature. You follow the creature around the corner and find yourself at a terminal. \nPlease choose your monsuta character to begin the game:" << endl;
+		cout << "Please enter your name." << endl;
+		cin >> player.name;
+		cout << "Please enter the relative number of the Raptors character you wish to claim. Your options are:\n 1: Echo(Wind Type)\n 2: trex(Earth Type)\n 3: Delta(Fire Type)\n 4: Blue(Water Type) \n 5: Charlie(Healer) << endl;
+		cin >> starter;
+		switch(starter){
+		case 1: cout << "You chose Blue." << endl; addInventoryItem(Blue.ID, player); break;
+		case 2: cout << "You chose Trex." << endl; addInventoryItem(T-rex.ID, player); break;
+		case 3: cout << "You chose Delta." << endl; addInventoryItem(ten.ID, player); break;
+		case 4: cout << "You chose Echo." << endl; addInventoryItem(kumo.ID, player); break;
+		case 5: cout << "You chose Charlie." << endl; addInventoryItem(kumo.ID, player); break;
+		default: cout << "You did not choose a Dino.\nGame Over."; return 0;
+ 		}
+
+		cout << "You find yourself in a large chamber with no entries or exits.\nAt the other end you see another person and a giant, indominus dino.\nDo you approach him(1) or attempt to hide(0)?\n";
+		Trainer start("Risky Sam");
+		addInventoryItem(echo.ID, start);
+ 		cin >> playerchoice;
+		if(playerchoice == 0){
+			cout << "An overbearing voice rings around you: 'YOU MAY NOT HIDE IN Dino'";
+			playerchoice = 1;
+		}
+		if(playerchoice != 1 && playerchoice != 0) cout << "You must fight."; playerchoice = 1;
+		if(playerchoice == 1){
+			fight(player, start);
+		}
+	}else if(mainopt != 1 && mainopt != 2){
+		cout << "Game Over.";
+		return 0;
+	}
+}
+void mainMenu(int& option){
+	cout << "Please type the relative number of your selection:\nBegin(1)\nAbout(2)\nQuit(0)" << endl;
+	cin >> option;
+}
+void fight(Trainer main, Trainer enemy){
+	int choice;
+	cout << "The battle has begun." << endl << "Please choose your dino:" << chooseDino(main) << endl;
+	cin >> choice;
+	switch(choice){
+
+	}
+
+}
+int addInventoryItem(string ID, Trainer trainer){
+	for(int i = 0; i < trainer.size; i++){
+		if(trainer.inventory[i] == 0){
+			trainer.inventory[i] = ID;
+			break;
+		}
+	}
+	return trainer.inventory, trainer.size;
+}
+void printInventory(Trainer trainer){
+	for(int i = 0; i < trainer.size; i++){
+		switch(trainer.inventory[i]){
+		case "000":
+			cout << "Blue" << endl; break;
+		case "001":
+			cout << "Trex" << endl; break;
+		case "002":
+			cout << "Delta" << endl; break;
+		case "003":
+			cout << "Echo" << endl; break;
+		case "004":
+			cout << "Charlie" << endl; break;
+		}
+	}
+}
+void chooseMonsuta(Trainer trainer){
+	for(int i = 0; i < trainer.size; i++){
+		int choice, choices[5];
+		switch(trainer.inventory[i]){
+		case "000":
+			cout << "Blue(" << i << ")" << endl; break;
+			choices[0] = i;
+			break;
+		case "001":
+			cout << "trex(" << i << ")" << endl; break;
+			choices[1] = i;
+			break;
+		case "002":
+			cout << "Delta(" << i << ")" << endl; break;
+			choices[2] = i;
+			break;
+		case "003":
+			cout << "Echo(" << i << ")" << endl; break;
+			choices[3] = i;
+			break;
+		case "004":
+			cout << "Charlie(" << i << ")" << endl; break;
+			choices[4] = i;
+			break;
+		}
+		cin >> choice;
+
+	}
+}
